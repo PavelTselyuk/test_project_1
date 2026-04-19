@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    kotlin("jvm")
 }
 
 group = "org.example"
@@ -21,6 +22,8 @@ dependencies {
     testImplementation("io.github.bonigarcia:webdrivermanager:6.1.0")
 
     testImplementation("io.qameta.allure:allure-selenide:2.27.0")
+    testImplementation("io.rest-assured:rest-assured:5.5.6")
+
 
     testImplementation("io.qameta.allure:allure-junit5:2.29.1")
     testImplementation("io.qameta.allure:allure-commandline:2.30.0")
@@ -29,8 +32,12 @@ dependencies {
     testImplementation("io.qameta.allure:allure-rest-assured:2.29.1")
     testImplementation("io.qameta.allure:allure-java-commons:2.29.1")
     testImplementation("org.aspectj:aspectjweaver:1.9.24")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(24)
 }
