@@ -143,7 +143,7 @@ public class FormPage {
         Selenide.open(BASE_URL);
     }
 
-    public void enterRequiredParamsAndClickSubmit(
+    public FormPage enterRequiredParamsAndClickSubmit(
             String name,
             String lastName,
             String email,
@@ -164,10 +164,11 @@ public class FormPage {
         submitButton.scrollIntoView(true).click();
 //        textBoxInput.setValue(searchString);
 //        textBoxInput.pressEnter(); //sendKeys(Keys.ENTER);
+        return this;
     }
 
 
-    public void enterAllParamsAndClickSubmit(User user) {
+    public FormPage enterAllParamsAndClickSubmit(User user) {
         firstNameInput.setValue(user.getFirstName());
         lastNameInput.setValue(user.getLastName());
         emailInput.setValue(user.getEmail());
@@ -209,18 +210,22 @@ public class FormPage {
         mobileNumberInput.setValue(user.getMobileNumber());
         dateOfBirthInput.setValue(user.getDateOfBirth());
         submitButton.scrollIntoView(true).click();
+        return this;
     }
 
-    public void pressSubmitButton() {
+    public FormPage pressSubmitButton() {
         submitButton.scrollIntoView(true).click();
+        return this;
     }
 
-    public void selectState() {
+    public FormPage selectState() {
         selectStateDropdownSvg.scrollIntoView(true).click();
         stateDropdownOptions.first().click();
+        return this;
     }
-    public void setPhoneNumber(String phoneNumber) {
+    public FormPage setPhoneNumber(String phoneNumber) {
         mobileNumberInput.setValue(phoneNumber);
+        return this;
     }
 
 }

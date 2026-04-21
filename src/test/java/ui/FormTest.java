@@ -35,7 +35,6 @@ public class FormTest extends BaseTest {
                 TEST_USER.getMobileNumber(),
                 TEST_USER.getDateOfBirth()
         );
-        int a = 5;
         Assertions.assertEquals(TEST_USER.getFirstName() + " " + TEST_USER.getLastName(), formPage.getStudentNameInModalWindow().getText());
         Assertions.assertEquals(TEST_USER.getEmail(), formPage.getStudentEmailInModalWindow().getText());
         Assertions.assertEquals("", formPage.getHobbiesInModalWindow().getText());
@@ -44,9 +43,7 @@ public class FormTest extends BaseTest {
 
     @Test
     public void whenEnterValidAllParamsNoPictureThenShowModalWindowWithAllParams() {
-        FormPage formPage = new FormPage();
-        formPage.enterAllParamsAndClickSubmit(TEST_USER);
-        int a = 5;
+        FormPage formPage = new FormPage().enterAllParamsAndClickSubmit(TEST_USER);
         Assertions.assertEquals(TEST_USER.getFirstName() + " " + TEST_USER.getLastName(), formPage.getStudentNameInModalWindow().getText());
         Assertions.assertEquals(TEST_USER.getEmail(), formPage.getStudentEmailInModalWindow().getText());
         String hobbiesAsString = String.join(", ", TEST_USER.getHobbies());
@@ -55,9 +52,8 @@ public class FormTest extends BaseTest {
 
     @Test
     public void whenPressSubmitButtonWithEmptyFieldsThenRequiredFieldsBorderColorRed() {
-        FormPage formPage = new FormPage();
-        formPage.pressSubmitButton();
-        int a = 5;
+        FormPage formPage = new FormPage().pressSubmitButton();
+
 
         //Red border
         formPage.getFirstNameInput().shouldNotHave(cssValue("background-image", "none"));
@@ -93,9 +89,9 @@ public class FormTest extends BaseTest {
 
     @Test
     public void whenEnterInvalidNumberAndSubmitThenNumberInputShowError() {
-        FormPage formPage = new FormPage();
-        formPage.setPhoneNumber("153feog");
-        formPage.pressSubmitButton();
+        FormPage formPage = new FormPage()
+                .setPhoneNumber("153feog")
+                .pressSubmitButton();
         formPage.getMobileNumberInput().shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
 }

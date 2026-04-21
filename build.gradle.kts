@@ -1,6 +1,8 @@
 plugins {
     id("java")
     kotlin("jvm")
+    id("io.qameta.allure") version "3.2" +
+            ".0"
 }
 
 group = "org.example"
@@ -28,7 +30,6 @@ dependencies {
     testImplementation("io.qameta.allure:allure-junit5:2.29.1")
     testImplementation("io.qameta.allure:allure-commandline:2.30.0")
     testImplementation("io.qameta.allure:allure-assertj:2.29.1")
-    testImplementation("io.qameta.allure:allure-assertj:2.29.1")
     testImplementation("io.qameta.allure:allure-rest-assured:2.29.1")
     testImplementation("io.qameta.allure:allure-java-commons:2.29.1")
     testImplementation("org.aspectj:aspectjweaver:1.9.24")
@@ -40,4 +41,9 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(24)
+}
+
+tasks.test {
+    useJUnitPlatform()
+    systemProperty("allure.results.directory", "build/allure-results")
 }

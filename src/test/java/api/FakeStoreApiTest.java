@@ -1,7 +1,11 @@
 package api;
 
 import api.entities.*;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,6 +18,12 @@ public class FakeStoreApiTest {
 
     private final String BASE_URL = "https://fakestoreapi.com/";
 
+    @BeforeAll
+    static void setupAllure() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    // Products
     @Test
     public void getAllProductsSuccess() {
         Specifications.installSpecification(
@@ -115,7 +125,7 @@ public class FakeStoreApiTest {
                 .then().log().body();
     }
 
-
+    // Login
     @Test
     public void successfulLogin() {
         Specifications.installSpecification(
@@ -149,7 +159,7 @@ public class FakeStoreApiTest {
                 .then().log().body();
     }
 
-
+    // Users
     @Test
     public void getAllUsersSuccess() {
         Specifications.installSpecification(
@@ -244,5 +254,4 @@ public class FakeStoreApiTest {
                 .delete("users/150")
                 .then().log().body();
     }
-
 }
